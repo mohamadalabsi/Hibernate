@@ -2,38 +2,49 @@ package org.ME.Learning;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 @Entity
 public class Student {
     @Id
-    private int id;
-    private StudentName name;
-    private int age;
+    private int rollNumber;
+    private String name;
+    private int marks;
+    @OneToOne
+    private Laptop laptop;
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRollNumber(int rollNumber) {
+        this.rollNumber = rollNumber;
     }
-    public void setName(StudentName name) {
+    public void setName(String name) {
         this.name = name;
     }
-    public void setAge(int age) {
-        this.age = age;
+    public void setMarks(int marks) {
+        this.marks = marks;
+    }
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
     }
     public int getId() {
-        return id;
+        return rollNumber;
     }
-    public StudentName getName() {
+    public String getName() {
         return name;
     }
      public int getAge() {
-        return age;
+        return marks;
+     }
+     public Laptop getLaptop() {
+        return laptop;
      }
 
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
-                ", name=" + name +
-                ", age=" + age +
+                "rollNumber=" + rollNumber +
+                ", name='" + name + '\'' +
+                ", marks=" + marks +
+                ", laptop=" + laptop +
                 '}';
     }
 }
