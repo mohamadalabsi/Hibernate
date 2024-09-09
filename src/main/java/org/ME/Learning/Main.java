@@ -34,23 +34,35 @@ public class Main {
 //        student.setName("Mohammad Al Absi");
 
 
-//!         insert and creat the data into the database from student and laptop class to student and laptop table // second example
+//!         insert and creat the data into the database from student and laptop class to student and laptop table  one to one // second example
+//
+//        Laptop laptop = new Laptop();
+//        laptop.setId(101);
+//        laptop.setBrand("Dell");
+//
+//        Student student = new Student();
+//        student.setRollNumber(1);
+//        student.setName("Mohammad Al Absi");
+//        student.setMarks(20);
+//        student.setLaptop(laptop);
 
-        Laptop laptop = new Laptop();
-        laptop.setId(101);
-        laptop.setBrand("Dell");
+
+//!      insert and creat the data into the database from student and laptop class to student and laptop table (one to many) without making student object in laptop class - it will creat another table (student_table)// third example
+//!      without making student object in laptop class it will make new table and we do not want that , we want it to behave like normal sql table and we have to mention the mapping // fourth example
 
         Student student = new Student();
         student.setRollNumber(1);
         student.setName("Mohammad Al Absi");
         student.setMarks(20);
-        student.setLaptop(laptop);
 
 
 
+        Laptop laptop = new Laptop();
+        laptop.setId(101);
+        laptop.setBrand("Dell");
+        laptop.setStudent(student);
 
-
-
+        student.getLaptop().add(laptop);
 
 
         Configuration  con = new Configuration().configure().addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);

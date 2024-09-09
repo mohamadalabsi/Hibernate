@@ -2,7 +2,10 @@ package org.ME.Learning;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -10,8 +13,8 @@ public class Student {
     private int rollNumber;
     private String name;
     private int marks;
-    @OneToOne
-    private Laptop laptop;
+    @OneToMany (mappedBy = "student")
+    private List < Laptop >laptop = new ArrayList< >();
 
     public void setRollNumber(int rollNumber) {
         this.rollNumber = rollNumber;
@@ -22,7 +25,7 @@ public class Student {
     public void setMarks(int marks) {
         this.marks = marks;
     }
-    public void setLaptop(Laptop laptop) {
+    public void setLaptop(List <Laptop> laptop) {
         this.laptop = laptop;
     }
     public int getId() {
@@ -34,9 +37,10 @@ public class Student {
      public int getAge() {
         return marks;
      }
-     public Laptop getLaptop() {
+
+    public List<Laptop> getLaptop() {
         return laptop;
-     }
+    }
 
     @Override
     public String toString() {
