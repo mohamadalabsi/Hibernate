@@ -10,8 +10,9 @@ public class Student {
     private int rollNumber;
     private String name;
     private int marks;
-    @ManyToMany  (mappedBy = "student")
-    private List < Laptop >laptop = new ArrayList< >();
+//    @ManyToMany  (mappedBy = "student")
+@ManyToMany  (mappedBy = "student" , fetch=FetchType.EAGER)
+private List < Laptop >laptop = new ArrayList< >();
 
     public void setRollNumber(int rollNumber) {
         this.rollNumber = rollNumber;

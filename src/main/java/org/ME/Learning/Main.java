@@ -47,7 +47,7 @@ public class Main {
 //        student.setLaptop(laptop);
 
 
-//!      insert and creat the data into the database from student and laptop class to student and laptop table (one to many one side) without making student object in laptop class - it will creat another table (student_table)// third example
+//!      insert and creat the data into the database from student and laptop class to student and laptop table (one to many o  ne side) without making student object in laptop class - it will creat another table (student_table)// third example
 //!      without making student object in laptop class it will make new table and we do not want that , we want it to behave like normal sql table and we have to mention the mapping // fourth example
 //
 //        Student student = new Student();
@@ -66,36 +66,47 @@ public class Main {
 
 ////!      insert and creat the data into the database from student and laptop class to student and laptop table (many to many both sides) // fifth example
 //!        here because it is many to many on both sides it will create new table for that
-        Student student = new Student();
-        student.setRollNumber(1);
-        student.setName("Mohammad Al Absi");
-        student.setMarks(20);
-
-
-
-        Laptop laptop = new Laptop();
-        laptop.setId(101);
-        laptop.setBrand("Dell");
-        laptop.getStudent().add(student);
-
-        student.getLaptop().add(laptop);
+//        Student student = new Student();
+//        student.setRollNumber(1);
+//        student.setName("Mohammad Al Absi");
+//        student.setMarks(20);
+//
+//
+//
+//        Laptop laptop = new Laptop();
+//        laptop.setId(101);
+//        laptop.setBrand("Dell");
+//        laptop.getStudent().add(student);
+//
+//        student.getLaptop().add(laptop);
 
 
         Configuration  con = new Configuration().configure().addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);
 
-        ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();  // just to get rid of the  line under buildSessionFactory that is why it is a service
+//        ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();  // just to get rid of the  line under buildSessionFactory that is why it is a service
 
-        SessionFactory sf = con.buildSessionFactory(reg);
+//        SessionFactory sf = con.buildSessionFactory(reg);
+        SessionFactory sf = con.buildSessionFactory(); // for fetching
         Session session = sf.openSession();
 
-        Transaction tx = session.beginTransaction();
-        session.save(student); //this is for inserting into the database
-        session.save(laptop);
+//        Transaction tx = session.beginTransaction();
+//        session.save(student); //this is for inserting into the database
+//        session.save(laptop);
 
-//         fetching the data from the database
-//         myCar=(Car)session.get(Car.class, 50);
+
+////!         fetching the data from the database
+
+///        myCar=(Car)session.get(Car.class, 50);
 //         System.out.println(myCar);
-        tx.commit();
+
+////!         fetching the data from the database [ EAGER and LAZY ]
+             session.beginTransaction();
+             Student student= session.get(Student.class, 1);
+             System.out.println(student.getAge());
+             System.out.println(student.getLaptop());
+
+          session.beginTransaction().commit();
+//        tx.commit();
 
 
     }
