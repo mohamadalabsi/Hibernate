@@ -1,0 +1,25 @@
+
+
+          Configuration  con = new Configuration().configure().addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);
+          ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();  // just to get rid of the  line under buildSessionFactory that is why it is a service
+
+
+          SessionFactory sf = con.buildSessionFactory(); // for fetching
+          SessionFactory sf = con.buildSessionFactory(reg); //  or this one  but you have to type the ServiceRegistry
+          Session session = sf.openSession();
+
+
+////!         fetching the data from the database
+
+          myCar=(Car)session.get(Car.class, 50);
+          System.out.println(myCar);
+
+
+
+////!         fetching the data from the database [ EAGER and LAZY ]
+          session.beginTransaction();
+          Student student= session.get(Student.class, 1);
+          System.out.println(student.getAge());
+          System.out.println(student.getLaptop());
+
+          session.beginTransaction().commit();
