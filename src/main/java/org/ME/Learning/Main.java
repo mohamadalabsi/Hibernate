@@ -14,99 +14,31 @@ import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) {
-//!        insert the data into the database from Car class to car table // first example
-//        Car myCar = new Car();
-//        myCar.setId(553);
-//        myCar.setModel("Sonata");
-//        myCar.setMake("hyundai");
-//        BigDecimal price = new BigDecimal("12050.49");
-//        myCar.setPrice(price);
 
-
-//!         insert and creat the data into the database from student class to student table // second example with to classes but one table
-//        StudentName  sn = new StudentName();
-//        sn.setFirstName("Mohammad");
-//        sn.setLastName("Al Absi");
-//
-//        Student student = new Student();
-//        student.setId(1);
-//        student.setAge(20);
-//        student.setName("Mohammad Al Absi");
-
-
-//!         insert and creat the data into the database from student and laptop class to student and laptop table  one to one // second example
-//
-//        Laptop laptop = new Laptop();
-//        laptop.setId(101);
-//        laptop.setBrand("Dell");
-//
-//        Student student = new Student();
-//        student.setRollNumber(1);
-//        student.setName("Mohammad Al Absi");
-//        student.setMarks(20);
-//        student.setLaptop(laptop);
-
-
-//!      insert and creat the data into the database from student and laptop class to student and laptop table (one to many o  ne side) without making student object in laptop class - it will creat another table (student_table)// third example
-//!      without making student object in laptop class it will make new table and we do not want that , we want it to behave like normal sql table and we have to mention the mapping // fourth example
-//
-//        Student student = new Student();
-//        student.setRollNumber(1);
-//        student.setName("Mohammad Al Absi");
-//        student.setMarks(20);
-//
-//
-//
-//        Laptop laptop = new Laptop();
-//        laptop.setId(101);
-//        laptop.setBrand("Dell");
-////        laptop.setStudent(student); without mentioning , the value in the laptop table of student_laptop is null
-//
-//        student.getLaptop().add(laptop);
-
-////!      insert and creat the data into the database from student and laptop class to student and laptop table (many to many both sides) // fifth example
-//!        here because it is many to many on both sides it will create new table for that
-//        Student student = new Student();
-//        student.setRollNumber(1);
-//        student.setName("Mohammad Al Absi");
-//        student.setMarks(20);
-//
-//
-//
-//        Laptop laptop = new Laptop();
-//        laptop.setId(101);
-//        laptop.setBrand("Dell");
-//        laptop.getStudent().add(student);
-//
-//        student.getLaptop().add(laptop);
-
+        Student student;
 
         Configuration  con = new Configuration().configure().addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);
 
-//        ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();  // just to get rid of the  line under buildSessionFactory that is why it is a service
+        ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();  // just to get rid of the  line under buildSessionFactory that is why it is a service
 
-//        SessionFactory sf = con.buildSessionFactory(reg);
-        SessionFactory sf = con.buildSessionFactory(); // for fetching
-        Session session = sf.openSession();
+        SessionFactory sf = con.buildSessionFactory(reg);
 
-//        Transaction tx = session.beginTransaction();
-//        session.save(student); //this is for inserting into the database
-//        session.save(laptop);
+//         Caching Level 1
+        Session session1 = sf.openSession();
+        session1.beginTransaction();
+        student=(Student) session1.get(Student.class, 1);
+        System.out.println(student);
+        session1.beginTransaction().commit();
+        session1.close();
 
 
-////!         fetching the data from the database
 
-///        myCar=(Car)session.get(Car.class, 50);
-//         System.out.println(myCar);
-
-////!         fetching the data from the database [ EAGER and LAZY ]
-             session.beginTransaction();
-             Student student= session.get(Student.class, 1);
-             System.out.println(student.getAge());
-             System.out.println(student.getLaptop());
-
-          session.beginTransaction().commit();
-//        tx.commit();
+        Session session2 = sf.openSession();
+        session2.beginTransaction();
+        student=(Student) session2.get(Student.class, 1);
+        System.out.println(student);
+        session2.beginTransaction().commit();
+        session2.close();
 
 
     }
