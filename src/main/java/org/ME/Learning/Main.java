@@ -23,7 +23,7 @@ public class Main {
 
         SessionFactory sf = con.buildSessionFactory(reg);
 
-//         Caching Level 1
+//         Caching Level 1         // if you have tow diffrent session but the same query , the query will be called once and the output will be also once
         Session session1 = sf.openSession();
         session1.beginTransaction();
         student=(Student) session1.get(Student.class, 1);
@@ -34,12 +34,24 @@ public class Main {
 
 
         Session session2 = sf.openSession();
-        session2.beginTransaction();
-        student=(Student) session2.get(Student.class, 1);
-        System.out.println(student);
-        session2.beginTransaction().commit();
-        session2.close();
 
+        student=(Student) session1.get(Student.class, 1);
+        System.out.println(student);
+        session2.beginTransaction().commit(); // if you have more than one session you have to close them
+
+// the query will be called once in this but the output will be print twice
+//        Session session1 = sf.openSession();
+//
+//
+//        student=(Student) session1.get(Student.class, 1);
+//        System.out.println(student);
+//
+//        student=(Student) session1.get(Student.class, 1);
+//        System.out.println(student);
+//
+//
+//        session1.beginTransaction().commit();
+//        session1.close();
 
     }
 }
