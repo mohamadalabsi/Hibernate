@@ -45,12 +45,12 @@
 
 
 
-// before the query will be called twice and will be print twice // but somehow it behaves like second level cache
+// before the query will be called twice and will be print twice
         Session session1 = sf.openSession();
         session1.beginTransaction();
         student=(Student) session1.get(Student.class, 1);
         System.out.println(student);
-        session1.beginTransaction().commit();
+        session1.getTransaction().commit();
         session1.close();
 
 
@@ -59,13 +59,13 @@
         session2.beginTransaction();
         student=(Student) session2.get(Student.class, 1);
         System.out.println(student);
-        session2.beginTransaction().commit();
+        session2.getTransaction().commit();
         session2.close();// if you have more than one session you have to close them
 
 
 //         Caching Level 2
 
-// if you have tow different session but the same query , the query will be called once and the output will be also once
+// if you have tow different session but the same query , the query will be called once and the output will be twice
         Session session1 = sf.openSession();
         session1.beginTransaction();
         student=(Student) session1.get(Student.class, 1);

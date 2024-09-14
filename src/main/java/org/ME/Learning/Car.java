@@ -1,11 +1,16 @@
 package org.ME.Learning;
 
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import org.hibernate.annotations.Cache;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity // name("car_table") if you want to creat a new table but with a different name
 //@Table(name="car_table") the same thing
+@Cacheable
+@Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 public class Car {
     @Id
     private  int id ;
