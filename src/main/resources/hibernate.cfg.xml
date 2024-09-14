@@ -18,7 +18,7 @@
 
         <!-- Automatically update schema -->
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property> <!-- this is for the get method and not for the query        -->
         <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
         <property name="hibernate.cache.use_query_cache">true</property>
 
