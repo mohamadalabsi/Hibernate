@@ -13,8 +13,8 @@ public class Student {
     private String name;
     private int marks;
 //    @ManyToMany  (mappedBy = "student")
-@ManyToMany  (mappedBy = "student" , fetch=FetchType.EAGER)
-private List < Laptop >laptop = new ArrayList< >();
+//@ManyToMany  (mappedBy = "student" , fetch=FetchType.EAGER)
+//private List < Laptop >laptop = new ArrayList< >();
 
     public void setRollNumber(int rollNumber) {
         this.rollNumber = rollNumber;
@@ -25,9 +25,9 @@ private List < Laptop >laptop = new ArrayList< >();
     public void setMarks(int marks) {
         this.marks = marks;
     }
-    public void setLaptop(List <Laptop> laptop) {
-        this.laptop = laptop;
-    }
+//    public void setLaptop(List <Laptop> laptop) {
+//        this.laptop = laptop;
+//    }
     public int getId() {
         return rollNumber;
     }
@@ -38,9 +38,9 @@ private List < Laptop >laptop = new ArrayList< >();
         return marks;
      }
 
-    public List<Laptop> getLaptop() {
-        return laptop;
-    }
+//    public List<Laptop> getLaptop() {
+//        return laptop;
+//    }
 
     @Override
     public String toString() {
@@ -48,7 +48,7 @@ private List < Laptop >laptop = new ArrayList< >();
                 "rollNumber=" + rollNumber +
                 ", name='" + name + '\'' +
                 ", marks=" + marks +
-                ", laptop=" + laptop +
+//                ", laptop=" + laptop +
                 '}';
     }
 }
