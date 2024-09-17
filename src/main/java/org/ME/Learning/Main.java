@@ -23,26 +23,12 @@ public class Main {
 
         SessionFactory sf = con.buildSessionFactory(reg);
 
-//         Caching Level  2 with query
-        Session session1 = sf.openSession();
-        session1.beginTransaction();
-        Query q1 =session1.createQuery("FROM Car WHERE id=55");
-        q1.setCacheable(true);
-        car=(Car)q1.uniqueResult();
-        System.out.println(car);
-        session1.getTransaction().commit();
-        session1.close();
+//         HQL
+        Session session = sf.openSession();
+        session.beginTransaction();
 
-
-
-        Session session2 = sf.openSession();
-        session2.beginTransaction();
-        Query q2 =session2.createQuery("FROM Car WHERE id=55");
-        q2.setCacheable(true);
-        car=(Car)q2.uniqueResult();
-        System.out.println(car);
-        session2.getTransaction().commit();
-        session2.close();// if you have more than one session you have to close them
+        session.getTransaction().commit();
+        session.close();// if you have more than one session you have to close them
 
     }
 }
