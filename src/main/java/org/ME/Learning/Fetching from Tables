@@ -177,3 +177,17 @@
 //
 //        }
 
+
+
+
+//         GET and LOAD  , the difference between them that get will hit the DB even if you do not print the object , but load does not hit it without printing , only when you want to use it
+        Student student = session.get(Student.class, 90); // get will give you the object
+//        and also with get if you give it nonexisting Id or value for a row it will print null
+//        Student student = session.load(Student.class, 90);  // load will give you a proxy object
+//         try {
+//             Thread.sleep(3000);
+//         }catch (InterruptedException e ){
+//             e.printStackTrace();
+//         }
+        System.out.println(student);
+
