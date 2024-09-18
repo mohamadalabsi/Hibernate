@@ -30,21 +30,9 @@ public class Main {
         Session session = sf.openSession();
         session.beginTransaction();
 
-//         Hibernate Object States
-        Student student = new Student();
-        student.setRollNumber(70);
-        student.setName("mohand alabsi");
-        student.setMarks(50);
-        session.save(student); // the object still in the persistent state
-        student.setMarks(80);  // this also will change in the database
-
-        session.remove(student);// the object will not be stored in the database
-
 
         session.getTransaction().commit();
-//        lets say we have here some operation and then I will change student.setMarks(44); again but i do not want the changes to be in the database and i should be after commit
-        session.detach(student);
-        student.setMarks(90);
+
         session.close();// if you have more than one session you have to close them
 
     }
